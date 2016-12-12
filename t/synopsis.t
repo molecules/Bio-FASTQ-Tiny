@@ -5,7 +5,6 @@ use autodie;  # Fatal exceptions for common unrecoverable errors (e.g. w/open)
 
 # Testing-related modules
 use Test::More;                  # provide testing functions (e.g. is, like)
-use Test::LongString;            # Compare strings byte by byte
 use Data::Section -setup;        # Set up labeled DATA sections
 use File::Temp  qw( tempfile );  #
 use File::Slurp qw( slurp    );  # Read a file into a string

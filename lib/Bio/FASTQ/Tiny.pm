@@ -209,7 +209,7 @@ sub open_fastq {
     my $filename = shift;
 
     # Return decompressing filehandle if applicable
-    return IO::Uncompress::Gunzip->new($filename) if $filename =~ /\.gz$/;
+    return IO::Uncompress::Gunzip->new($filename, MultiStream => 1) if $filename =~ /\.gz$/;
 
     # Return normal filehandle
     open(my $fh, '<', $filename);
@@ -231,7 +231,7 @@ Bio::FASTQ::Tiny
 
 =head1 SYNOPSIS
 
-    use 5.010;
+    use v5.10;
     use strict;
     use warnings;
     use autodie;

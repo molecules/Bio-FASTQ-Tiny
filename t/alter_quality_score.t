@@ -5,7 +5,6 @@ use autodie;  # Fatal exceptions for common unrecoverable errors (e.g. w/open)
 
 # Testing-related modules
 use Test::More;                  # provide testing functions (e.g. is, like)
-use Test::LongString;            # Compare strings byte by byte
 use Data::Section -setup;        # Set up labeled DATA sections
 use File::Temp  qw( tempfile );  #
 use File::Slurp qw( slurp    );  # Read a file into a string
@@ -25,7 +24,7 @@ my $print_qual_plus_32 = coderef_print_altered_quality($fh_out, 32);
 process_fastq($filename, $print_qual_plus_32); 
 my $expected = string_from('expected');
 
-is_string($result, $expected, 'Altered quality scores');
+is($result, $expected, 'Altered quality scores');
 
 
 done_testing();
