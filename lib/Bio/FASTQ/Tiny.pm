@@ -25,7 +25,7 @@ our @EXPORT_OK = qw( iterator
                      coderef_print_barcoded_entry
                      coderef_print_entry
                      open_fastq
-                     open_writeable_fastq
+                     open_writable_fastq
                      );
 #=============================================================================
 
@@ -218,7 +218,7 @@ sub open_fastq {
     return $fh;
 }
 
-sub open_writeable_fastq {
+sub open_writable_fastq {
     my $filename = shift;
 
     if ($filename =~ /.gz $/xms ) {
@@ -227,7 +227,7 @@ sub open_writeable_fastq {
         return $fh;
     }
 
-    # Return normal "writeable" filehandle
+    # Return normal "writable" filehandle
     open(my $fh, '>', $filename);
     return $fh;
 }
