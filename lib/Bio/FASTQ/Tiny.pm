@@ -9,7 +9,7 @@ use warnings; # Emit helpful warnings
 use autodie;  # Fatal exceptions for common unrecoverable errors (e.g. open on nonexistent file)
 use Carp qw(croak);
 use IO::Uncompress::Gunzip;
-use IO::Compress::Gzip qw($GZipError);
+use IO::Compress::Gzip qw($GzipError);
 #=============================================================================
 
 #=============================================================================

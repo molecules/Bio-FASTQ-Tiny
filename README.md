@@ -7,7 +7,7 @@ Bio::FASTQ::Tiny
 
 # VERSION
 
-version 0.004
+version 0.005
 
 # SYNOPSIS
 
