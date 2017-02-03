@@ -9,6 +9,7 @@ use warnings; # Emit helpful warnings
 use autodie;  # Fatal exceptions for common unrecoverable errors (e.g. open on nonexistent file)
 use Carp qw(croak);
 use IO::Uncompress::Gunzip;
+use IO::Compress::Gzip qw($GZipError);
 #=============================================================================
 
 #=============================================================================
@@ -24,6 +25,7 @@ our @EXPORT_OK = qw( iterator
                      coderef_print_barcoded_entry
                      coderef_print_entry
                      open_fastq
+                     open_writeable_fastq
                      );
 #=============================================================================
 
@@ -211,8 +213,22 @@ sub open_fastq {
     # Return decompressing filehandle if applicable
     return IO::Uncompress::Gunzip->new($filename, MultiStream => 1) if $filename =~ /\.gz$/;
 
-    # Return normal filehandle
+    # Return normal "reading" filehandle
     open(my $fh, '<', $filename);
+    return $fh;
+}
+
+sub open_writeable_fastq {
+    my $filename = shift;
+
+    if ($filename =~ /.gz $/xms ) {
+        my $fh = IO::Compress::Gzip->new($filename)
+            or die "IO::Compress::Gzip failed: $GzipError\n";
+        return $fh;
+    }
+
+    # Return normal "writeable" filehandle
+    open(my $fh, '>', $filename);
     return $fh;
 }
 
