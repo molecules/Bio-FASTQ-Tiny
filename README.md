@@ -3,7 +3,7 @@ community feedback before freezing the API.
 
 # NAME
 
-Bio::FASTQ::Tiny
+Bio::IRCF::FASTQ::Tiny
 
 # VERSION
 
@@ -16,7 +16,7 @@ version 0.010
     use warnings;
     use autodie;
 
-    use Bio::FASTQ::Tiny qw( process_fastq );
+    use Bio::IRCF::FASTQ::Tiny qw( process_fastq );
 
     my $fastq_filename = shift;
 
@@ -40,7 +40,7 @@ occurs in a FASTQ file.
     use warnings;
     use autodie;
 
-    use Bio::FASTQ::Tiny qw( iterator );
+    use Bio::IRCF::FASTQ::Tiny qw( iterator );
 
     my $fastq_filename = shift;
 

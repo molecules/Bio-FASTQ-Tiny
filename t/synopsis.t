@@ -12,7 +12,7 @@ use Carp        qw( croak    );  # Push blame for errors back to line calling fu
 
 use lib 'lib';    # add 'lib' to @INC
 
-use Bio::FASTQ::Tiny qw( process_fastq to_fasta);
+use Bio::IRCF::FASTQ::Tiny qw( process_fastq to_fasta);
 
 {
     open( my $fh_out, '>', \my $result );

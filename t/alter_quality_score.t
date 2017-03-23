@@ -12,7 +12,7 @@ use Carp        qw( croak    );  # Push blame for errors back to line calling fu
 
 # Distribution-specific modules
 use lib 'lib';              # add 'lib' to @INC
-use Bio::FASTQ::Tiny qw(process_fastq coderef_print_altered_quality);
+use Bio::IRCF::FASTQ::Tiny qw(process_fastq coderef_print_altered_quality);
 
 my $EMPTY_STRING = q{};
 

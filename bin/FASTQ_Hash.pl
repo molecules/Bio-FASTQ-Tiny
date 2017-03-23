@@ -13,7 +13,7 @@ use warnings;
 use v5.10;
 use autodie;
 
-use Bio::FASTQ::Tiny qw(process_fastq);
+use Bio::IRCF::FASTQ::Tiny qw(process_fastq);
 use Digest::MD5 qw(md5_base64);
 
 my @files = @ARGV;

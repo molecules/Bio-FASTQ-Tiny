@@ -12,10 +12,10 @@ use Carp        qw( croak    ); # Function to emit errors that blame the calling
 
 # Distribution-specific
 use lib 'lib';             # add 'lib' to @INC
-use Bio::FASTQ::Tiny qw( coderef_print_barcoded_entry
-                    coderef_print_entry
-                    iterator
-                    process_fastq);
+use Bio::IRCF::FASTQ::Tiny qw( coderef_print_barcoded_entry
+                               coderef_print_entry
+                               iterator
+                               process_fastq);
 
 my $EMPTY_STRING = q{};
 my $SUCCESS = 1;
@@ -52,7 +52,7 @@ my $SUCCESS = 1;
     open( my $fh_out, '>', \my $result );
 
     # Create a coderef which prints each FASTQ entry
-    my $print_entry = Bio::FASTQ::Tiny::coderef_print_entry($fh_out);
+    my $print_entry = Bio::IRCF::FASTQ::Tiny::coderef_print_entry($fh_out);
 
     my @expected = (
         { header   => 'HWI-ST538:168:XXXXXXXXX:4:1101:1214:1873 1:Y:0:',
@@ -101,7 +101,7 @@ my $SUCCESS = 1;
         open( my $fh_out, '>', \my $result );
 
         # Create a coderef which prints out a FASTQ entry if it matches a specific barcode
-        my $print_barcoded_entry = Bio::FASTQ::Tiny::coderef_print_barcoded_entry( { fh_out => $fh_out,  barcodes => $barcode} );
+        my $print_barcoded_entry = Bio::IRCF::FASTQ::Tiny::coderef_print_barcoded_entry( { fh_out => $fh_out,  barcodes => $barcode} );
  
         # Apply coderef to every FASTQ entry
         my $filename = filename_for("fastq_GCT TNC");
