@@ -18,7 +18,6 @@ use base qw( Exporter );
 
 our @EXPORT_OK = qw( iterator
                      process_fastq
-                     apply_coderef
                      to_fasta
                      coderef_alter_qual_scores_insitu
                      coderef_print_altered_quality
@@ -30,8 +29,6 @@ our @EXPORT_OK = qw( iterator
 #=============================================================================
 
 my $SUCCESS = 1;
-
-*Bio::FASTQ::Tiny::apply_coderef=*Bio::FASTQ::Tiny::process_fastq;
 
 # Create FASTQ iterator
 sub iterator {
@@ -202,7 +199,7 @@ sub to_fasta {
         say {$fh_out} $entry_href->{seq}         ;
         return $SUCCESS; # Must return true value
     };
-    apply_coderef($fh_in, $make_fasta_coderef);
+    process_fastq($fh_in, $make_fasta_coderef);
     return;
 }
 
@@ -252,7 +249,7 @@ Bio::FASTQ::Tiny
     use warnings;
     use autodie;
 
-    use Bio::FASTQ::Tiny qw( apply_coderef );
+    use Bio::FASTQ::Tiny qw( process_fastq );
 
     my $fastq_filename = shift;
 
@@ -266,11 +263,11 @@ Bio::FASTQ::Tiny
         return 1; # Must return true value
     };
 
-    apply_coderef($fh_fastq, $make_fasta_coderef);
+    process_fastq($fh_fastq, $make_fasta_coderef);
 
 
-    # Another example. This one keeps track of each sequence and how many
-    # times it occurs in a FASTQ file.
+Another example. This one keeps track of each sequence and how many times it
+occurs in a FASTQ file.
 
     use v5.10;
     use strict;
@@ -330,8 +327,6 @@ Bio::FASTQ::Tiny
 
     Returns an iterator which applies the coderef to one FASTQ entry at a
     time, returning the result.
-
-=head2 apply_coderef()
 
 =head2 process_fastq()
 

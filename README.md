@@ -7,7 +7,7 @@ Bio::FASTQ::Tiny
 
 # VERSION
 
-version 0.007
+version 0.008
 
 # SYNOPSIS
 
@@ -16,7 +16,7 @@ version 0.007
     use warnings;
     use autodie;
 
-    use Bio::FASTQ::Tiny qw( apply_coderef );
+    use Bio::FASTQ::Tiny qw( process_fastq );
 
     my $fastq_filename = shift;
 
@@ -30,11 +30,10 @@ version 0.007
         return 1; # Must return true value
     };
 
-    apply_coderef($fh_fastq, $make_fasta_coderef);
+    process_fastq($fh_fastq, $make_fasta_coderef);
 
-
-    # Another example. This one keeps track of each sequence and how many
-    # times it occurs in a FASTQ file.
+Another example. This one keeps track of each sequence and how many times it
+occurs in a FASTQ file.
 
     use v5.10;
     use strict;
@@ -90,8 +89,6 @@ version 0.007
 
     Returns an iterator which applies the coderef to one FASTQ entry at a
     time, returning the result.
-
-## apply\_coderef()
 
 ## process\_fastq()
 
