@@ -7,7 +7,7 @@ Bio::FASTQ::Tiny
 
 # VERSION
 
-version 0.008
+version 0.009
 
 # SYNOPSIS
 
@@ -97,7 +97,6 @@ occurs in a FASTQ file.
     every entry in the FASTQ file.
 
 ## coderef\_print\_altered\_quality
-    (Designed to work with either `process_fastq` or `iterator`)
 
     positional parameters:
         filehandle
@@ -108,20 +107,15 @@ occurs in a FASTQ file.
             example, if this is -31, then a score of 'B' becomes '#', changing
             from an "old Illumina" encoding to the Sanger encoding.
 
-    Returns a coderef that is ready to be used with either C<process_fastq> or
-    C<iterator>.
+    Returns a coderef compatible with C<process_fastq> or C<iterator>.
 
 ## coderef\_print\_barcoded\_entry
-    (Designed to work with either `process_fastq` or `iterator`)
 
-    Returns a coderef that is ready to be used with either C<process_fastq> or
-    C<iterator>.
+    Returns a coderef compatible with C<process_fastq> or C<iterator>.
 
 ## coderef\_print\_entry
-    (Designed to work with either `process_fastq` or `iterator`)
 
-    Returns a coderef that is ready to be used with either C<process_fastq> or
-    C<iterator>.
+    Returns a coderef compatible with C<process_fastq> or C<iterator>.
 
 # RATIONALE
 

@@ -32,15 +32,16 @@ my $SUCCESS = 1;
 
 # Create FASTQ iterator
 sub iterator {
-    my $filename = shift // croak 'filehandle required';
-    my $coderef  = shift // sub { shift() };             # Default to returning hashref of FASTQ entry
+    my $filename = shift // croak 'file name required';
+    my $coderef  = shift // sub { shift() };            # Default returns hashref of FASTQ entry
 
     my $fh = open_fastq($filename);
-    # create a line by line iterator for the file
+
+    # create a line-by-line iterator for the file
     my $next_chomped_line = _coderef_next_chomped_line($fh);
 
     return sub {
-        my $header   = _remove_first_char($next_chomped_line->()) // return; # Return if there are no more lines
+        my $header   = _remove_first_char($next_chomped_line->()) // return; # Return if no more lines
         my $seq      =  $next_chomped_line->();
         my $q_header = _remove_first_char($next_chomped_line->());
         my $qual     = $next_chomped_line->();
@@ -335,7 +336,6 @@ occurs in a FASTQ file.
     every entry in the FASTQ file.
 
 =head2 coderef_print_altered_quality
-    (Designed to work with either C<process_fastq> or C<iterator>)
 
     positional parameters:
         filehandle
@@ -346,21 +346,15 @@ occurs in a FASTQ file.
             example, if this is -31, then a score of 'B' becomes '#', changing
             from an "old Illumina" encoding to the Sanger encoding.
 
-    Returns a coderef that is ready to be used with either C<process_fastq> or
-    C<iterator>.
+    Returns a coderef compatible with C<process_fastq> or C<iterator>.
 
 =head2 coderef_print_barcoded_entry
-    (Designed to work with either C<process_fastq> or C<iterator>)
 
-    Returns a coderef that is ready to be used with either C<process_fastq> or
-    C<iterator>.
+    Returns a coderef compatible with C<process_fastq> or C<iterator>.
 
 =head2 coderef_print_entry
-    (Designed to work with either C<process_fastq> or C<iterator>)
 
-    Returns a coderef that is ready to be used with either C<process_fastq> or
-    C<iterator>.
-
+    Returns a coderef compatible with C<process_fastq> or C<iterator>.
 
 =head1 RATIONALE
 
