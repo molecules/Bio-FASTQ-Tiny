@@ -7,7 +7,7 @@ Bio::FASTQ::Tiny
 
 # VERSION
 
-version 0.009
+version 0.010
 
 # SYNOPSIS
 
@@ -110,6 +110,13 @@ occurs in a FASTQ file.
     Returns a coderef compatible with C<process_fastq> or C<iterator>.
 
 ## coderef\_print\_barcoded\_entry
+
+    positional parameters:
+
+        hashref with the following keys
+
+            fh_out  Filehandle to print to.
+            barcodes  String containing barcodes separated by whitespace.
 
     Returns a coderef compatible with C<process_fastq> or C<iterator>.
 

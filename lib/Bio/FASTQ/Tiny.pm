@@ -350,6 +350,13 @@ occurs in a FASTQ file.
 
 =head2 coderef_print_barcoded_entry
 
+    positional parameters:
+
+        hashref with the following keys
+
+            fh_out  Filehandle to print to.
+            barcodes  String containing barcodes separated by whitespace.
+
     Returns a coderef compatible with C<process_fastq> or C<iterator>.
 
 =head2 coderef_print_entry
