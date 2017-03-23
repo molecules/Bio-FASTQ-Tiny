@@ -279,11 +279,9 @@ occurs in a FASTQ file.
 
     my $fastq_filename = shift;
 
-    open(my $fh_fastq, '<', $fastq_filename);
-
     my $get_simple_entry = sub { return shift(); };
 
-    my $fastq_it = iterator($fh_fastq, $get_simple_entry);
+    my $fastq_it = iterator($fastq_filename, $get_simple_entry);
 
     my %count_of;
 
@@ -310,8 +308,8 @@ occurs in a FASTQ file.
 =head2 iterator()
 
         positional parameters:
-            filehandle
-                This is the filehandle for a FASTQ file.
+            file name
+                This is the name of a FASTQ file.
 
             coderef (optional)
 
