@@ -266,7 +266,7 @@ Bio::FASTQ::Tiny
         return 1; # Must return true value
     };
 
-    apply_coderef($fh_fastq, $make_fasta_coderef); 
+    apply_coderef($fh_fastq, $make_fasta_coderef);
 
 
     # Another example. This one keeps track of each sequence and how many
@@ -298,7 +298,7 @@ Bio::FASTQ::Tiny
 
     # Print out list of sequences and how many times each occurred
     for my $sequence ( sort keys %count_of){
-       say $sequence, "\t", $count_of{$sequence}; 
+       say $sequence, "\t", $count_of{$sequence};
     }
 
 
@@ -310,6 +310,7 @@ Bio::FASTQ::Tiny
 =head1 SUBROUTINES/METHODS
 
 =head2 iterator()
+
         positional parameters:
             filehandle
                 This is the filehandle for a FASTQ file.
@@ -322,7 +323,7 @@ Bio::FASTQ::Tiny
                 quality header, and quality scores of a FASTQ entry,
                 respectively. The strings for the header and quality header
                 are stripped of their first character (i.e. '@' and '+',
-                respectively). 
+                respectively).
 
                 If no coderef is specified, this will simply return the
                 hashref described above.
@@ -331,6 +332,7 @@ Bio::FASTQ::Tiny
     time, returning the result.
 
 =head2 apply_coderef()
+
 =head2 process_fastq()
 
     Takes the same arguments as iterator. However, instead of returning
@@ -338,7 +340,7 @@ Bio::FASTQ::Tiny
     every entry in the FASTQ file.
 
 =head2 coderef_print_altered_quality
-    (Designed to work with either process_fastq or iterator)
+    (Designed to work with either C<process_fastq> or C<iterator>)
 
     positional parameters:
         filehandle
@@ -349,20 +351,20 @@ Bio::FASTQ::Tiny
             example, if this is -31, then a score of 'B' becomes '#', changing
             from an "old Illumina" encoding to the Sanger encoding.
 
-    Returns a coderef that is ready to be used with either process_fastq or
-    iterator. 
+    Returns a coderef that is ready to be used with either C<process_fastq> or
+    C<iterator>.
 
 =head2 coderef_print_barcoded_entry
-    (Designed to work with either process_fastq or iterator)
+    (Designed to work with either C<process_fastq> or C<iterator>)
 
-    Returns a coderef that is ready to be used with either process_fastq or
-    iterator. 
+    Returns a coderef that is ready to be used with either C<process_fastq> or
+    C<iterator>.
 
 =head2 coderef_print_entry
-    (Designed to work with either process_fastq or iterator)
+    (Designed to work with either C<process_fastq> or C<iterator>)
 
-    Returns a coderef that is ready to be used with either process_fastq or
-    iterator. 
+    Returns a coderef that is ready to be used with either C<process_fastq> or
+    C<iterator>.
 
 
 =head1 RATIONALE
