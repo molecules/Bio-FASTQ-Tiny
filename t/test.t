@@ -101,7 +101,7 @@ my $SUCCESS = 1;
         open( my $fh_out, '>', \my $result );
 
         # Create a coderef which prints out a FASTQ entry if it matches a specific barcode
-        my $print_barcoded_entry = Bio::IRCF::FASTQ::Tiny::coderef_print_barcoded_entry( { fh_out => $fh_out,  barcodes => $barcode} );
+        my $print_barcoded_entry = Bio::IRCF::FASTQ::Tiny::coderef_print_barcoded_entry( $fh_out,  $barcode );
  
         # Apply coderef to every FASTQ entry
         my $filename = filename_for("fastq_GCT TNC");

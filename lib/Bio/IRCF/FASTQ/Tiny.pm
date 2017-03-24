@@ -23,8 +23,6 @@ our @EXPORT_OK = qw( iterator
                      coderef_print_altered_quality
                      coderef_print_barcoded_entry
                      coderef_print_entry
-                     open_fastq
-                     open_writable_fastq
                      );
 #=============================================================================
 
@@ -35,7 +33,7 @@ sub iterator {
     my $filename = shift // croak 'file name required';
     my $coderef  = shift // sub { shift() };            # Default returns hashref of FASTQ entry
 
-    my $fh = open_fastq($filename);
+    my $fh = open_input_file($filename);
 
     # create a line-by-line iterator for the file
     my $next_chomped_line = _coderef_next_chomped_line($fh);
@@ -92,9 +90,8 @@ sub _remove_first_char {
 }
 
 sub coderef_print_barcoded_entry {
-    my $opt_href        = shift                 // croak 'Hashref of options required';
-    my $fh_out          = $opt_href->{fh_out}   // croak 'Filehandle required';
-    my $barcodes_string = $opt_href->{barcodes} // croak 'Barcodes string required';
+    my $fh_out          = shift // croak 'Filehandle required';
+    my $barcodes_string = shift // croak 'Barcodes string required';
 
     my $matches     = _coderef_matches_a_barcode($barcodes_string);
     my $print_entry = coderef_print_entry($fh_out);
@@ -205,7 +202,7 @@ sub to_fasta {
 }
 
 # Open either gzipped compressed or normal file (determined by presence/absence of '.gz' file extension)
-sub open_fastq {
+sub open_input_file {
     my $filename = shift;
 
     # Return decompressing filehandle if applicable
@@ -216,7 +213,7 @@ sub open_fastq {
     return $fh;
 }
 
-sub open_writable_fastq {
+sub open_output_file {
     my $filename = shift;
 
     if ($filename =~ /.gz $/xms ) {
