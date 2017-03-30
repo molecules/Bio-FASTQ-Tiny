@@ -1,0 +1,116 @@
+#!/bin/env perl
+use strict;
+use warnings;
+use autodie;
+use v5.10;
+
+use File::Find::Wanted;
+use List::Util qw(min);
+
+use Cwd qw( getcwd);
+
+use File::Slurper qw( write_text);
+
+my $CORE_REQUEST = shift // 12;
+my $PARTITION    = shift // 'BioCompute';
+
+my @files = find_wanted( sub { -f && m{ _L \d+ _R \d _001\.fastq (?:\.gz)? \z }xms }, '.' );
+
+@files = map { substr($_,2) } @files;
+
+my %files_for;
+
+for my $file (@files) {
+
+    if ($file =~ m{ \A ( .+ ) _L \d+ _R (\d) _001.fastq (?:\.gz)? \z }xms ) {
+        my $name      = $1;
+        my $direction = $2;
+        push @{ $files_for{$name}{$direction} }, $file;
+    }
+    else {
+        warn "Couldn't parse '$file'. Not processed";
+    }
+}
+
+my $cwd = getcwd;
+
+for my $sample_name (sort keys %files_for) {
+
+    my @directions = keys %{$files_for{$sample_name}};
+ 
+    for my $direction (@directions) {
+        my @files_for_sample_direction = @{ $files_for{$sample_name}{$direction} }; 
+
+        # Don't combine files if there aren't at least 2
+        if (scalar @files_for_sample_direction < 2) {
+            warn "No files to combine for '$sample_name($direction)'\n";
+
+            # skip this iteration, since there aren't files to combine
+            next;
+        }
+    
+        # Create sbatch scripts, submit them and capture their jobids. Wait for them to finish
+        my $out_name = "${sample_name}_R${direction}_001.fastq";
+        my $all_input_files = join(" ", sort @files_for_sample_direction );
+
+        run_script_for($out_name, $all_input_files);
+    }
+}
+
+warn "Finished combined files in $cwd\n";
+
+sub run_script_for {
+    my $out_name           = shift // die "output file name required";
+    my $input_files_string = shift // die "need a space-delimited string containing original file names";
+
+    my $script_name = "combine_$out_name.sbatch";
+
+    my $script = <<"END";
+#!/usr/bin/env perl
+#SBATCH --partition=BioCompute,Lewis
+#SBATCH --time=2-0
+#SBATCH --mem=40GB
+#SBATCH --job-name=$script_name
+#SBATCH -o $script_name.o_%J 
+#SBATCH -e $script_name.e_%J 
+use strict;
+use warnings;
+use autodie;
+use v5.10;
+
+`cat $input_files_string > $out_name`;
+END
+
+    write_text($script_name, $script);
+
+    my $job_info = `sbatch $script_name`;
+
+    my $job_id = get_jobid($job_info);
+
+    my $wait_step = `sbatch --output=/dev/null --partition=BioCompute,Lewis --wait --dependency=$job_id --wrap='echo "Finished job $job_id"'`;
+}
+
+sub get_jobid {
+    my $string = shift;
+
+    # remove newline character (if any)
+    chomp $string;
+
+    # Extract jobid
+    if ($string =~ m{ \A .* \s (\d+) \z }xms ) {
+        my $jobid = $1;
+        return $jobid;
+    }
+    else {
+        warn "Cound not identify jobid in $string";
+    }
+    return;
+}
+
+=pod
+
+=head1 NAME
+
+combine_lanes (combine FASTQ files of the same lane and direction)
+
+=cut
