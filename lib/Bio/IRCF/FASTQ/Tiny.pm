@@ -299,6 +299,11 @@ occurs in a FASTQ file.
 
 =head1 DESCRIPTION
 
+=head1 Utilities (in bin directory)
+
+   combine_lanes
+   extract_barcoded_fastq_with_min_length
+   FASTQ_Hash.pl
 
 =head1 SUBROUTINES/METHODS
 
