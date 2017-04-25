@@ -7,7 +7,7 @@ Bio::IRCF::FASTQ::Tiny
 
 # VERSION
 
-version 0.015
+version 0.016
 
 # SYNOPSIS
 
@@ -66,7 +66,6 @@ occurs in a FASTQ file.
 
 # Utilities (in bin directory)
 
-    combine_lanes
     extract_barcoded_fastq_with_min_length
     FASTQ_Hash.pl
 
