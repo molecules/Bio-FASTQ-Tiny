@@ -68,7 +68,7 @@ sub run_script_for {
     my $script = <<"END";
 #!/usr/bin/env perl
 #SBATCH --partition=BioCompute,Lewis
-#SBATCH --time=2-0
+#SBATCH --time=4:00:00
 #SBATCH --mem=40GB
 #SBATCH --job-name=$script_name
 #SBATCH -o $script_name.o_%J 
@@ -111,6 +111,10 @@ sub get_jobid {
 
 =head1 NAME
 
-combine_lanes (combine FASTQ files of the same lane and direction)
+combine_lanes
+
+=head1 DESCRIPTION
+
+combine FASTQ files of the same lane and direction
 
 =cut
