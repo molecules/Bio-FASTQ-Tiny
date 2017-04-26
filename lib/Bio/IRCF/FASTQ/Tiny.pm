@@ -201,22 +201,23 @@ sub to_fasta {
     return;
 }
 
-# Open either gzipped compressed or normal file (determined by presence/absence of '.gz' file extension)
+# Open file for reading (as gzipped compressed if name ends in '.gz')
 sub open_input_file {
     my $filename = shift;
 
     # Return decompressing filehandle if applicable
-    return IO::Uncompress::Gunzip->new($filename, MultiStream => 1) if $filename =~ /\.gz$/;
+    return IO::Uncompress::Gunzip->new($filename, MultiStream => 1) if $filename =~ /\.gz$/xms;
 
     # Return normal "reading" filehandle
     open(my $fh, '<', $filename);
     return $fh;
 }
 
+# Open writable file (as gzipped compressed if name ends in '.gz')
 sub open_output_file {
     my $filename = shift;
 
-    if ($filename =~ /.gz $/xms ) {
+    if ($filename =~ /\.gz$/xms ) {
         my $fh = IO::Compress::Gzip->new($filename)
             or die "IO::Compress::Gzip failed: $GzipError\n";
         return $fh;
