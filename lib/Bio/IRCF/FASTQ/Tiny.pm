@@ -23,6 +23,8 @@ our @EXPORT_OK = qw( iterator
                      coderef_print_altered_quality
                      coderef_print_barcoded_entry
                      coderef_print_entry
+                     open_input_file
+                     open_output_file
                      );
 #=============================================================================
 
