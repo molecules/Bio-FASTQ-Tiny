@@ -7,7 +7,7 @@ Bio::IRCF::FASTQ::Tiny
 
 # VERSION
 
-version 0.016
+version 0.018
 
 # SYNOPSIS
 
@@ -71,7 +71,7 @@ occurs in a FASTQ file.
 
 # SUBROUTINES/METHODS
 
-## iterator()
+## iterator
 
         positional parameters:
             file name
@@ -93,7 +93,7 @@ occurs in a FASTQ file.
     Returns an iterator which applies the coderef to one FASTQ entry at a
     time, returning the result.
 
-## process\_fastq()
+## process\_fastq
 
     Takes the same arguments as iterator. However, instead of returning
     an iterator, it builds one internally and then exhaustively applies it to
@@ -126,6 +126,22 @@ occurs in a FASTQ file.
 ## coderef\_print\_entry
 
     Returns a coderef compatible with C<process_fastq> or C<iterator>.
+
+## open\_input
+
+    positional parameter: 
+
+        filename (if last extension is 'gz', uses IO::Uncompress::Gunzip)
+
+    Returns a readable filehandle
+
+## open\_output
+
+    positional parameter: 
+
+        filename (if last extension is 'gz', uses IO::Compress::Gzip)
+
+    Returns a writable filehandle
 
 # RATIONALE
 

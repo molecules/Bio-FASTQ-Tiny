@@ -23,8 +23,8 @@ our @EXPORT_OK = qw( iterator
                      coderef_print_altered_quality
                      coderef_print_barcoded_entry
                      coderef_print_entry
-                     open_input_file
-                     open_output_file
+                     open_input
+                     open_output
                      );
 #=============================================================================
 
@@ -35,7 +35,7 @@ sub iterator {
     my $filename = shift // croak 'file name required';
     my $coderef  = shift // sub { shift() };            # Default returns hashref of FASTQ entry
 
-    my $fh = open_input_file($filename);
+    my $fh = open_input($filename);
 
     # create a line-by-line iterator for the file
     my $next_chomped_line = _coderef_next_chomped_line($fh);
@@ -204,7 +204,7 @@ sub to_fasta {
 }
 
 # Open file for reading (as gzipped compressed if name ends in '.gz')
-sub open_input_file {
+sub open_input {
     my $filename = shift;
 
     # Return decompressing filehandle if applicable
@@ -216,7 +216,7 @@ sub open_input_file {
 }
 
 # Open writable file (as gzipped compressed if name ends in '.gz')
-sub open_output_file {
+sub open_output {
     my $filename = shift;
 
     if ($filename =~ /\.gz$/xms ) {
@@ -309,7 +309,7 @@ occurs in a FASTQ file.
 
 =head1 SUBROUTINES/METHODS
 
-=head2 iterator()
+=head2 iterator
 
         positional parameters:
             file name
@@ -331,7 +331,7 @@ occurs in a FASTQ file.
     Returns an iterator which applies the coderef to one FASTQ entry at a
     time, returning the result.
 
-=head2 process_fastq()
+=head2 process_fastq
 
     Takes the same arguments as iterator. However, instead of returning
     an iterator, it builds one internally and then exhaustively applies it to
@@ -364,6 +364,22 @@ occurs in a FASTQ file.
 =head2 coderef_print_entry
 
     Returns a coderef compatible with C<process_fastq> or C<iterator>.
+
+=head2 open_input
+
+    positional parameter: 
+
+        filename (if last extension is 'gz', uses IO::Uncompress::Gunzip)
+
+    Returns a readable filehandle
+
+=head2 open_output
+
+    positional parameter: 
+
+        filename (if last extension is 'gz', uses IO::Compress::Gzip)
+
+    Returns a writable filehandle
 
 =head1 RATIONALE
 
