@@ -4,7 +4,7 @@
 
 =head1 NAME
 
-FASTQ_Hash.pl -- calculate an MD5sum specific to the records in one or more FASTQ files, but is independent of the order they appear
+FASTQ_Hash.pl -- calculate an MD5sum specific to the records in one or more FASTQ files, but is independent of the order they appear. (Warning: This won't help you if the order of sequences in your files is important, such as ensuring that paired read files are always in a particular order.).
 
 =cut
 
