@@ -7,7 +7,7 @@ Bio::IRCF::FASTQ::Tiny
 
 # VERSION
 
-version 0.018
+version 0.019
 
 # SYNOPSIS
 
@@ -156,7 +156,14 @@ occurs in a FASTQ file.
 
 # DEPENDENCIES
 
-    Perl 5.10 or later.
+    Perl 5.10 or later
+
+    Core Perl modules if not installed (e.g. on RedHat install "perl-core")
+        IO::Compress::Gzip
+        IO::Uncompress::Gunzip
+
+    Tests require 
+        File::Slurp
 
 # INCOMPATIBILITIES
 

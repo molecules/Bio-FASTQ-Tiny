@@ -6,7 +6,7 @@ use v5.10;
 
 use Test::More;
 
-use File::Slurper qw( read_text );
+use File::Slurp qw( slurp );
 
 chdir 't';
 
@@ -15,9 +15,9 @@ system('../bin/extract_barcoded_fastq_with_min_length sample_with_barcodes.fastq
 system('gunzip -c sample_with_barcodes.fastq.barcode_filtered.fastq.gz > result.fastq');
 system('gunzip -c sample_with_barcodes.fastq.unmatched.fastq.gz > unmatched.fastq');
 
-my $result = read_text( 'result.fastq');
+my $result = slurp( 'result.fastq');
 
-my $expected = read_text ( 'expected_with_barcodes.fastq' );
+my $expected = slurp( 'expected_with_barcodes.fastq' );
 
 is($result, $expected, 'Correctly filterd FASTQ file');
 
