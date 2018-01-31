@@ -183,7 +183,7 @@ occurs in a FASTQ file.
 
 =head1 Utilities (in bin directory)
 
-=head2 extract_singletons_from_paired_fastq (utility in bin directory)
+=head2 extract_singletons_from_paired_fastq
 
     extract_singletons_from_paired_fastq A_R1.fastq A_R2.fastq
 
@@ -203,12 +203,14 @@ Given two FASTQ files (e.g. F<A_R1.fastq.gz> and F<A_R2.fastq.gz>), outputs the 
 
 =back
 
-=head2 extract_barcoded_fastq_with_min_length (utility in bin directory)
+=head2 extract_barcoded_fastq_with_min_length
 
 TODO
 
-=head2 FASTQ_Hash.pl (utility in bin directory)
+=head2 FASTQ_Hash
 
-TODO
+=head2 DESCRIPTION
+
+calculate an MD5sum specific to the records in one or more FASTQ files, but is independent of the order they appear. (Warning: This won't help you if the order of sequences in your files is important, such as ensuring that paired read files are always in a particular order.).
 
 =cut
