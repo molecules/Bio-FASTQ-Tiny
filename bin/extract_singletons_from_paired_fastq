@@ -1,4 +1,5 @@
 #!/bin/env perl
+# ABSTRACT: remove singletons from paired FASTQ files (assumes both pairs have a record for each sequence, but some may be empty or "too-short")
 use strict;
 use warnings;
 use v5.10;
