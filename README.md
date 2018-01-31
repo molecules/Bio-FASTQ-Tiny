@@ -143,27 +143,6 @@ occurs in a FASTQ file.
     Speed and flexibility. To change quality score formats, for example, this
     is over 10x faster than using BioPerl.
 
-# extract\_singletons\_from\_paired\_fastq (utility in bin directory)
-
-    extract_singletons_from_paired_fastq A_R1.fastq A_R2.fastq
-
-## DESCRIPTION
-
-Given two FASTQ files (e.g. `A_R1.fastq.gz` and `A_R2.fastq.gz`), outputs the following:
-
-- `A_R1.good_paired.fastq.gz` the original `A_R1.fastq.gz` file except that records have been removed for "orphans" and "empty" or "too short" sequences.
-- `A_R2.good_paired.fastq.gz` the original `A_R2.fastq.gz` file except that records have been removed for "orphans" and "empty" or "too short" sequences.
-- `A_R1.orphans.fastq.gz` sequences from `A_R1.fastq.gz` that lost its pair from `A_R2.fastq.gz`
-- `A_R2.orphans.fastq.gz` sequences from `A_R2.fastq.gz` that lost its pair from `A_R1.fastq.gz`
-
-# extract\_barcoded\_fastq\_with\_min\_length (utility in bin directory)
-
-TODO
-
-# FASTQ\_Hash.pl (utility in bin directory)
-
-TODO
-
 # DIAGNOSTICS
 
 # CONFIGURATION AND ENVIRONMENT
@@ -198,3 +177,26 @@ TODO
     BioPerl
 
 # ACKNOWLEDGEMENTS
+
+# Utilities (in bin directory)
+
+## extract\_singletons\_from\_paired\_fastq (utility in bin directory)
+
+    extract_singletons_from_paired_fastq A_R1.fastq A_R2.fastq
+
+## DESCRIPTION
+
+Given two FASTQ files (e.g. `A_R1.fastq.gz` and `A_R2.fastq.gz`), outputs the following:
+
+- `A_R1.good_paired.fastq.gz` the original `A_R1.fastq.gz` file except that records have been removed for "orphans" and "empty" or "too short" sequences.
+- `A_R2.good_paired.fastq.gz` the original `A_R2.fastq.gz` file except that records have been removed for "orphans" and "empty" or "too short" sequences.
+- `A_R1.orphans.fastq.gz` sequences from `A_R1.fastq.gz` that lost its pair from `A_R2.fastq.gz`
+- `A_R2.orphans.fastq.gz` sequences from `A_R2.fastq.gz` that lost its pair from `A_R1.fastq.gz`
+
+## extract\_barcoded\_fastq\_with\_min\_length (utility in bin directory)
+
+TODO
+
+## FASTQ\_Hash.pl (utility in bin directory)
+
+TODO
