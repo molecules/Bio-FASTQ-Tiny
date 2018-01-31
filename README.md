@@ -7,7 +7,7 @@ Bio::IRCF::FASTQ::Tiny
 
 # VERSION
 
-version 0.021
+version 0.022
 
 # SYNOPSIS
 
