@@ -7,7 +7,7 @@ Bio::IRCF::FASTQ::Tiny
 
 # VERSION
 
-version 0.023
+version 0.024
 
 # SYNOPSIS
 
@@ -182,9 +182,11 @@ occurs in a FASTQ file.
 
 ## extract\_singletons\_from\_paired\_fastq
 
+### SYNOPSIS
+
     extract_singletons_from_paired_fastq A_R1.fastq A_R2.fastq
 
-## DESCRIPTION
+### DESCRIPTION
 
 Given two FASTQ files (e.g. `A_R1.fastq.gz` and `A_R2.fastq.gz`), outputs the following:
 
@@ -193,12 +195,18 @@ Given two FASTQ files (e.g. `A_R1.fastq.gz` and `A_R2.fastq.gz`), outputs the fo
 - `A_R1.orphans.fastq.gz` sequences from `A_R1.fastq.gz` that lost its pair from `A_R2.fastq.gz`
 - `A_R2.orphans.fastq.gz` sequences from `A_R2.fastq.gz` that lost its pair from `A_R1.fastq.gz`
 
-## extract\_barcoded\_fastq\_with\_min\_length
+## extract\_internally\_barcoded\_fastq
 
-TODO
+### SYNOPSIS
+
+    extract_internally_barcoded_fastq A_R1.fastq.gz barcodes.txt 
+
+### DESCRIPTION
+
+Given a FASTQ file and a file containing a list of 5' barcodes, output one FASTQ file containing sequences for each barcode. 
 
 ## FASTQ\_Hash
 
-## DESCRIPTION
+### DESCRIPTION
 
 calculate an MD5sum specific to the records in one or more FASTQ files, but is independent of the order they appear. (Warning: This won't help you if the order of sequences in your files is important, such as ensuring that paired read files are always in a particular order.).

@@ -185,9 +185,11 @@ occurs in a FASTQ file.
 
 =head2 extract_singletons_from_paired_fastq
 
+=head3 SYNOPSIS
+
     extract_singletons_from_paired_fastq A_R1.fastq A_R2.fastq
 
-=head2 DESCRIPTION
+=head3 DESCRIPTION
 
 Given two FASTQ files (e.g. F<A_R1.fastq.gz> and F<A_R2.fastq.gz>), outputs the following:
 
@@ -203,13 +205,19 @@ Given two FASTQ files (e.g. F<A_R1.fastq.gz> and F<A_R2.fastq.gz>), outputs the 
 
 =back
 
-=head2 extract_barcoded_fastq_with_min_length
+=head2 extract_internally_barcoded_fastq
 
-TODO
+=head3 SYNOPSIS
+
+    extract_internally_barcoded_fastq A_R1.fastq.gz barcodes.txt 
+
+=head3 DESCRIPTION
+
+Given a FASTQ file and a file containing a list of 5' barcodes, output one FASTQ file containing sequences for each barcode. 
 
 =head2 FASTQ_Hash
 
-=head2 DESCRIPTION
+=head3 DESCRIPTION
 
 calculate an MD5sum specific to the records in one or more FASTQ files, but is independent of the order they appear. (Warning: This won't help you if the order of sequences in your files is important, such as ensuring that paired read files are always in a particular order.).
 
