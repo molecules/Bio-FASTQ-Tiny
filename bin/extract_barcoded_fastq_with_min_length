@@ -1,5 +1,4 @@
 #!/bin/env perl
-package split_by_barcode;
 # ABSTRACT: Filter FASTQ file for reads that have a barcode and that have a minimum length (not counting the barcode) 
 
 #=============================================================================
