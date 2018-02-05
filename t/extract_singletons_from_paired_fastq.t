@@ -7,13 +7,13 @@ use v5.10;
 # Core Perl modules
 use File::Glob ':bsd_glob';
 use File::Basename;
-use File::Temp             qw(tempfile);
+use File::Temp qw(tempfile);
 use IO::Uncompress::Gunzip qw(gunzip $GunzipError);
 
 # CPAN modules
 use Test2::Bundle::Extended;
 use Test2::Tools::Exception qw(dies);
-use File::Slurper   qw(write_text read_text);
+use File::Slurp qw(write_file);
 
 my $DEBUG = shift // 0;
 
@@ -229,7 +229,7 @@ sub json_filename_for {
     my $json_string = string_for($section);
 
     my $json_filename = "t/$section.json";
-    write_text($json_filename, $json_string);
+    write_file($json_filename, $json_string);
     return $json_filename;
 }
 
@@ -251,7 +251,7 @@ sub gzipped_file_for {
     my $section  = shift;
     my $filename = shift;
 
-    write_text($filename,string_for($section));
+    write_file($filename,string_for($section));
 
     # create compressed file
     my $gzipped_name = "$filename.gz";
