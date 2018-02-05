@@ -1,5 +1,5 @@
 #!/bin/env perl
-package Bio::IRCF::FASTQ::Tiny::CleanPaired.pm;
+package Bio::IRCF::FASTQ::Tiny::CleanPaired;
 
 # ABSTRACT: remove singletons from paired FASTQ files (assumes both pairs have a record for each sequence, but some may be empty or "too-short")
 use strict;
@@ -8,7 +8,7 @@ use v5.10;
 
 #NOTE: Be sure to compare FastQC from original and trimmed
 
-use Bio::IRCF::FASTQ::Tiny qw( iterator coderef_print_entry open_writable_fastq);
+use Bio::IRCF::FASTQ::Tiny qw( iterator coderef_print_entry open_output);
 
 my $filename_R1 = shift;
 my $filename_R2 = shift;
@@ -65,7 +65,7 @@ sub __print_singleton_fh_out_for {
     $basename =~ s/ \.gz \z//xms;
     $basename =~ s/ \.fastq \z//xms;
     $basename =~ s/ \.fq \z//xms;
-    my $fh_out = open_writable_fastq("$basename.orphans.fastq.gz");
+    my $fh_out = open_output("$basename.orphans.fastq.gz");
     return coderef_print_entry($fh_out);
 }
 
@@ -74,63 +74,6 @@ sub __print_fh_out_for {
     $basename =~ s/ \.gz \z//xms;
     $basename =~ s/ \.fastq \z//xms;
     $basename =~ s/ \.fq \z//xms;
-    my $fh_out = open_writable_fastq("$basename.good_paired.fastq.gz");
+    my $fh_out = open_output("$basename.good_paired.fastq.gz");
     return coderef_print_entry($fh_out);
 }
-
-Consider this Beta until it is officially released on CPAN. I want to solicit
-community feedback before freezing the API.
-
-=head1 NAME
-
-Bio::IRCF::FASTQ::Tiny::Barcoded
-
-=head1 SYNOPSIS
-
-    extract_singletons_from_paired_fastq A_R1.fastq A_R2.fastq
-
-=head1 DESCRIPTION
-
-Given two FASTQ files (e.g. F<A_R1.fastq.gz> and F<A_R2.fastq.gz>), outputs the following:
-
-=over
-
-=item F<A_R1.good_paired.fastq.gz> the original F<A_R1.fastq.gz> file except that "orphans" and "empty" or "too short" sequences have been removed.
-=item F<A_R2.good_paired.fastq.gz> the original F<A_R2.fastq.gz> file except that "orphans" and "empty" or "too short" sequences have been removed.
-=item F<A_R1.orphans.fastq.gz> sequences from F<A_R1.fastq.gz> that lost its pair from F<A_R2.fastq.gz>
-=item F<A_R2.orphans.fastq.gz> sequences from F<A_R2.fastq.gz> that lost its pair from F<A_R1.fastq.gz>
-
-=back
-
-=head1 DIAGNOSTICS
-
-=head1 CONFIGURATION AND ENVIRONMENT
-
-    None special, besides those described in DEPENDENCIES.
-
-=head1 DEPENDENCIES
-
-    Perl 5.10 or later
-
-    Core Perl modules if not installed (e.g. on RedHat install "perl-core")
-        IO::Compress::Gzip
-        IO::Uncompress::Gunzip
-
-    Tests require 
-        File::Slurp
-
-=head1 INCOMPATIBILITIES
-
-    None that the author is aware of.
-
-=head1 BUGS AND LIMITATIONS
-
-     There are no known bugs in this module.
-
-     Please report problems to molecules at cpan.org.
-
-     Patches are welcome.
-
-=head1 SEE ALSO
-
-=head1 ACKNOWLEDGEMENTS

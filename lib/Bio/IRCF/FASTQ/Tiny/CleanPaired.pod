@@ -1,0 +1,66 @@
+=pod
+
+=head1 NAME
+
+Bio::IRCF::FASTQ::Tiny::CleanPaired (a.k.a. ../../../../../bin/extract_singletons_from_paired_fastq)
+
+=head2 DESCRIPTION
+
+Consider this Beta until it is officially released on CPAN. I want to solicit
+community feedback before freezing the API.
+
+=head1 NAME
+
+Bio::IRCF::FASTQ::Tiny::CleanPaired
+
+=head1 SYNOPSIS
+
+    extract_singletons_from_paired_fastq A_R1.fastq A_R2.fastq
+
+=head1 DESCRIPTION
+
+Given two FASTQ files (e.g. F<A_R1.fastq.gz> and F<A_R2.fastq.gz>), outputs the following:
+
+=over
+
+=item F<A_R1.good_paired.fastq.gz> the original F<A_R1.fastq.gz> file except that "orphans" and "empty" or "too short" sequences have been removed.
+=item F<A_R2.good_paired.fastq.gz> the original F<A_R2.fastq.gz> file except that "orphans" and "empty" or "too short" sequences have been removed.
+=item F<A_R1.orphans.fastq.gz> sequences from F<A_R1.fastq.gz> that lost its pair from F<A_R2.fastq.gz>
+=item F<A_R2.orphans.fastq.gz> sequences from F<A_R2.fastq.gz> that lost its pair from F<A_R1.fastq.gz>
+
+=back
+
+=head1 DIAGNOSTICS
+
+=head1 CONFIGURATION AND ENVIRONMENT
+
+    None special, besides those described in DEPENDENCIES.
+
+=head1 DEPENDENCIES
+
+    Perl 5.10 or later
+
+    Core Perl modules if not installed (e.g. on RedHat install "perl-core")
+        IO::Compress::Gzip
+        IO::Uncompress::Gunzip
+
+    Tests require
+        File::Slurp
+
+=head1 INCOMPATIBILITIES
+
+    None that the author is aware of.
+
+=head1 BUGS AND LIMITATIONS
+
+     There are no known bugs in this module.
+
+     Please report problems to molecules at cpan.org.
+
+     Patches are welcome.
+
+=head1 SEE ALSO
+
+=head1 ACKNOWLEDGEMENTS
+
+=cut
