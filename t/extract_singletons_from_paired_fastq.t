@@ -11,8 +11,7 @@ use File::Temp qw(tempfile);
 use IO::Uncompress::Gunzip qw(gunzip $GunzipError);
 
 # CPAN modules
-use Test2::Bundle::Extended;
-use Test2::Tools::Exception qw(dies);
+use Test::More;
 use File::Slurp qw(write_file);
 
 my $DEBUG = shift // 0;
