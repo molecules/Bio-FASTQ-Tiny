@@ -10,7 +10,7 @@ use File::Slurp qw( slurp );
 
 chdir 't';
 
-system('../bin/extract_barcoded_fastq_with_min_length sample_with_barcodes.fastq barcodes 50');
+system('../bin/extract_internally_barcoded_fastq sample_with_barcodes.fastq barcodes 50');
 
 system('gunzip -c sample_with_barcodes.fastq.barcode_filtered.fastq.gz > result.fastq');
 system('gunzip -c sample_with_barcodes.fastq.unmatched.fastq.gz > unmatched.fastq');

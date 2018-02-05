@@ -1,5 +1,5 @@
 #!/bin/env perl
-package Bio::IRCF::FASTQ::Tiny::Barcoded.pm
+package Bio::IRCF::FASTQ::Tiny::Barcoded;
 # ABSTRACT: Filter FASTQ file for reads that have a barcode and that have a minimum length (not counting the barcode) 
 
 #=============================================================================

@@ -8,7 +8,7 @@ use v5.10;
 
 #NOTE: Be sure to compare FastQC from original and trimmed
 
-use Bio::FASTQ::Tiny qw( iterator coderef_print_entry open_writable_fastq);
+use Bio::IRCF::FASTQ::Tiny qw( iterator coderef_print_entry open_writable_fastq);
 
 my $filename_R1 = shift;
 my $filename_R2 = shift;

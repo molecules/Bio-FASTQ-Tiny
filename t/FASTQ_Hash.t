@@ -8,13 +8,13 @@ use Test::More;
 
 use lib 'lib';
 
-my $result = `bin/FASTQ_Hash.pl t/hello.fastq.gz t/howdy.fastq.gz`;
+my $result = `bin/FASTQ_Hash t/hello.fastq.gz t/howdy.fastq.gz`;
 
-my $expected = `bin/FASTQ_Hash.pl t/expected.fastq.gz`; 
+my $expected = `bin/FASTQ_Hash t/expected.fastq.gz`; 
 
 is($result, $expected, "Correctly hashed two files same as combined file");
 
-my $bad_result = `bin/FASTQ_Hash.pl t/hello.fastq.gz`;
+my $bad_result = `bin/FASTQ_Hash t/hello.fastq.gz`;
 
 ok(! ($bad_result eq $expected), 'Hashing one file is not the same as hashing it plus another');
 
