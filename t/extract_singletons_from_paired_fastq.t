@@ -7,13 +7,12 @@ use v5.10;
 # Core Perl modules
 use File::Glob ':bsd_glob';
 use File::Basename;
-use File::Temp      qw(tempfile);
-use IO::Uncompress::Gunzip qw( gunzip $GunzipError);
+use File::Temp             qw(tempfile);
+use IO::Uncompress::Gunzip qw(gunzip $GunzipError);
 
 # CPAN modules
 use Test2::Bundle::Extended;
 use Test2::Tools::Exception qw(dies);
-use Method::Signatures;
 use File::Slurper   qw(write_text read_text);
 
 my $DEBUG = shift // 0;
@@ -52,8 +51,8 @@ my $DEBUG = shift // 0;
     # clean up temp files
     unlink $input_forward   unless $DEBUG;
     unlink $input_reverse   unless $DEBUG;
-    unlink $final_forward unless $DEBUG;
-    unlink $final_reverse unless $DEBUG;
+    unlink $final_forward   unless $DEBUG;
+    unlink $final_reverse   unless $DEBUG;
     unlink $orphan_forward  unless $DEBUG;
     unlink $orphan_reverse  unless $DEBUG;
     unlink $json_filename   unless $DEBUG;
@@ -67,7 +66,9 @@ system('rm -rf job_files.dir');
 
 done_testing;
 
-func string_for ($section) {
+sub string_for {
+    my $section = shift;
+
     my %string_for = (
 
 
@@ -222,12 +223,9 @@ END
     return $string_for{$section};
 }
 
-func file_for ($section,$filename) {
-    write_text($filename, string_for($section));
-    return $filename;
-}
+sub json_filename_for {
+    my $section = shift;
 
-func json_filename_for ($section) {
     my $json_string = string_for($section);
 
     my $json_filename = "t/$section.json";
@@ -235,7 +233,9 @@ func json_filename_for ($section) {
     return $json_filename;
 }
 
-func gzipped_pair_of_files_for ($base) {
+sub gzipped_pair_of_files_for {
+    my $base = shift;
+
     my $forward_section = "${base}_forward";
     my $reverse_section = "${base}_reverse";
     my $forward_name    = "${base}_R1_001.fastq";
@@ -247,7 +247,10 @@ func gzipped_pair_of_files_for ($base) {
     return ($forward_input, $reverse_input);
 }
 
-func gzipped_file_for ($section,$filename) {
+sub gzipped_file_for {
+    my $section  = shift;
+    my $filename = shift;
+
     write_text($filename,string_for($section));
 
     # create compressed file
